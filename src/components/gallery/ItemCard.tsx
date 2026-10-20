@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { currentLanguage } from '@/i18n';
+import { cn } from '@/lib/cn';
 import { itemText } from '@/gallery/registry';
 import type { GalleryItem } from '@/gallery/types';
 import { useSettings } from '@/stores/settings';
@@ -34,7 +35,7 @@ function StaticThumb({ item }: { item: GalleryItem }) {
   );
 }
 
-export function ItemCard({ item }: { item: GalleryItem }) {
+export function ItemCard({ item, compact = false }: { item: GalleryItem; compact?: boolean }) {
   const { t } = useTranslation();
   const livePreviews = useSettings((s) => s.livePreviews);
   const [ref, inView] = useInView<HTMLDivElement>();
@@ -62,8 +63,13 @@ export function ItemCard({ item }: { item: GalleryItem }) {
           <StaticThumb item={item} />
         )}
       </div>
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <h3 className="pr-8 font-semibold group-hover:text-accent">
+      <div className={cn('flex flex-1 flex-col', compact ? 'gap-1 p-3' : 'gap-2 p-4')}>
+        <h3
+          className={cn(
+            'font-semibold group-hover:text-accent',
+            compact ? 'line-clamp-2 text-sm' : 'pr-8',
+          )}
+        >
           <Link
             to={`/item/${item.id}`}
             aria-label={t('item.open', { name: text.name })}
@@ -72,28 +78,44 @@ export function ItemCard({ item }: { item: GalleryItem }) {
             {text.name}
           </Link>
         </h3>
-        <p className="line-clamp-2 flex-1 text-sm text-muted">{text.summary}</p>
-        <div className="flex flex-wrap gap-1.5">
-          <Chip>{t(`categories.${item.category}`)}</Chip>
-          <Chip>{t(`difficulty.${item.difficulty}`)}</Chip>
-        </div>
+        {compact ? (
+          <p className="text-xs text-muted">{t(`difficulty.${item.difficulty}`)}</p>
+        ) : (
+          <>
+            <p className="line-clamp-2 flex-1 text-sm text-muted">{text.summary}</p>
+            <div className="flex flex-wrap gap-1.5">
+              <Chip>{t(`categories.${item.category}`)}</Chip>
+              <Chip>{t(`difficulty.${item.difficulty}`)}</Chip>
+            </div>
+          </>
+        )}
       </div>
       <FavoriteButton
         id={item.id}
         name={text.name}
-        className="absolute top-2 right-2 z-10 size-9 bg-surface/85 backdrop-blur"
+        className={cn(
+          'absolute top-2 right-2 z-10 bg-surface/85 backdrop-blur',
+          compact ? 'size-8' : 'size-9',
+        )}
       />
     </article>
   );
 }
 
-export function ItemGrid({ items }: { items: GalleryItem[] }) {
+export function ItemGrid({ items, compact = false }: { items: GalleryItem[]; compact?: boolean }) {
   return (
-    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <ul
+      className={cn(
+        'grid',
+        compact
+          ? 'grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5'
+          : 'grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3',
+      )}
+    >
       {items.map((item) => (
         <li key={item.id} className="flex">
           <div className="flex w-full [&>article]:w-full">
-            <ItemCard item={item} />
+            <ItemCard item={item} compact={compact} />
           </div>
         </li>
       ))}

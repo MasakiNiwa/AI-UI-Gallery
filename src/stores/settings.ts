@@ -11,6 +11,8 @@ export interface SettingsState {
   livePreviews: boolean;
   /** Minimize animations across the app and demos. */
   reduceMotion: boolean;
+  /** Card size in the gallery grid. */
+  cardSize: 'large' | 'compact';
   set: <K extends keyof SettingsValues>(key: K, value: SettingsValues[K]) => void;
   reset: () => void;
 }
@@ -22,6 +24,7 @@ export const DEFAULT_SETTINGS: SettingsValues = {
   language: 'auto',
   livePreviews: true,
   reduceMotion: false,
+  cardSize: 'large',
 };
 
 /** Every localStorage key this app writes starts with this prefix (used by "Clear all data"). */

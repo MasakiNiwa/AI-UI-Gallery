@@ -1,24 +1,41 @@
-import { Eraser, Search, SearchX, X } from 'lucide-react';
+import { Eraser, Grid2x2, Grid3x3, Search, SearchX, X } from 'lucide-react';
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router';
 import { ItemGrid } from '@/components/gallery/ItemCard';
 import { Button } from '@/components/ui/Button';
+import { SegmentedControl } from '@/components/ui/SegmentedControl';
 import { CATEGORIES } from '@/gallery/categories';
 import { ITEMS, itemText } from '@/gallery/registry';
 import { searchItems } from '@/gallery/search/searchClient';
 import type { CategoryId, Difficulty } from '@/gallery/types';
 import { currentLanguage } from '@/i18n';
 import { cn } from '@/lib/cn';
+import { useSettings } from '@/stores/settings';
 
 type Sort = 'newest' | 'name' | 'difficulty';
 const DIFFICULTY_ORDER: Record<Difficulty, number> = { easy: 0, medium: 1, hard: 2 };
+
+/** Technologies used by at least two items, most common first (rarer ones remain searchable). */
+const TECH_OPTIONS = (() => {
+  const counts = new Map<string, number>();
+  for (const item of ITEMS)
+    for (const tech of item.tech) counts.set(tech, (counts.get(tech) ?? 0) + 1);
+  return [...counts]
+    .filter(([, n]) => n >= 2)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([tech, n]) => ({ tech, n }));
+})();
 
 export function GalleryPage() {
   const { t, i18n } = useTranslation();
   const [params, setParams] = useSearchParams();
   const category = params.get('category') as CategoryId | null;
   const sort = (params.get('sort') as Sort | null) ?? 'newest';
+  const level = params.get('level') as Difficulty | null;
+  const tech = params.get('tech');
+  const cardSize = useSettings((s) => s.cardSize);
+  const setSetting = useSettings((s) => s.set);
   const [query, setQuery] = useState(params.get('q') ?? '');
   const deferredQuery = useDeferredValue(query.trim());
   const [matchedIds, setMatchedIds] = useState<string[] | null>(null);
@@ -70,6 +87,8 @@ export function GalleryPage() {
       ? matchedIds.map((id) => ITEMS.find((i) => i.id === id)!).filter(Boolean)
       : [...ITEMS];
     if (category) list = list.filter((i) => i.category === category);
+    if (level) list = list.filter((i) => i.difficulty === level);
+    if (tech) list = list.filter((i) => i.tech.includes(tech));
     // Search results keep relevance order unless the user picks an explicit sort.
     if (matchedIds && !params.get('sort')) return list;
     if (sort === 'name')
@@ -80,9 +99,9 @@ export function GalleryPage() {
     return list;
     // i18n.language: re-sort by name when the language changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [matchedIds, category, sort, params, i18n.language]);
+  }, [matchedIds, category, level, tech, sort, params, i18n.language]);
 
-  const hasFilters = Boolean(query || category || params.get('sort'));
+  const hasFilters = Boolean(query || category || level || tech || params.get('sort'));
   const clearAll = () => {
     setQuery('');
     setMatchedIds(null);
@@ -176,8 +195,61 @@ export function GalleryPage() {
         })}
       </div>
 
+      <div className="flex items-center gap-2">
+        <label className="sr-only" htmlFor="gallery-level">
+          {t('difficulty.label')}
+        </label>
+        <select
+          id="gallery-level"
+          value={level ?? ''}
+          onChange={(e) => update({ level: e.target.value || null })}
+          className={cn(
+            'h-9 min-w-0 flex-1 rounded-xl border bg-surface px-3 text-sm sm:flex-none',
+            level ? 'border-accent text-fg' : 'border-line text-muted',
+          )}
+        >
+          <option value="">{t('gallery.anyDifficulty')}</option>
+          {(['easy', 'medium', 'hard'] as const).map((d) => (
+            <option key={d} value={d}>
+              {t(`difficulty.${d}`)}
+            </option>
+          ))}
+        </select>
+        <label className="sr-only" htmlFor="gallery-tech">
+          {t('gallery.tech')}
+        </label>
+        <select
+          id="gallery-tech"
+          value={tech ?? ''}
+          onChange={(e) => update({ tech: e.target.value || null })}
+          className={cn(
+            'h-9 min-w-0 flex-1 rounded-xl border bg-surface px-3 text-sm sm:max-w-xs sm:flex-none',
+            tech ? 'border-accent text-fg' : 'border-line text-muted',
+          )}
+        >
+          <option value="">{t('gallery.anyTech')}</option>
+          {TECH_OPTIONS.map(({ tech: name, n }) => (
+            <option key={name} value={name}>
+              {name} ({n})
+            </option>
+          ))}
+        </select>
+        <div className="ml-auto shrink-0">
+          <SegmentedControl<'large' | 'compact'>
+            label={t('gallery.cardSize')}
+            value={cardSize}
+            onChange={(v) => setSetting('cardSize', v)}
+            iconOnly
+            options={[
+              { value: 'large', label: t('gallery.cardLarge'), icon: Grid2x2 },
+              { value: 'compact', label: t('gallery.cardCompact'), icon: Grid3x3 },
+            ]}
+          />
+        </div>
+      </div>
+
       {results.length > 0 ? (
-        <ItemGrid items={results} />
+        <ItemGrid items={results} compact={cardSize === 'compact'} />
       ) : (
         <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-line px-6 py-16 text-center">
           <SearchX className="size-8 text-muted" aria-hidden />
