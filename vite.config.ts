@@ -111,6 +111,24 @@ export default defineConfig({
     __COMMIT__: JSON.stringify(gitCommit()),
     __REPO_URL__: JSON.stringify('https://github.com/MasakiNiwa/AI-UI-Gallery'),
   },
+  build: {
+    rolldownOptions: {
+      output: {
+        // Long-lived vendor chunks cache well across deploys; gallery metadata grows with every new item.
+        codeSplitting: {
+          groups: [
+            {
+              name: 'react',
+              test: /node_modules[\\/](react|react-dom|scheduler|react-router)[\\/]/,
+            },
+            { name: 'ui', test: /node_modules[\\/](@radix-ui|@floating-ui|react-remove-scroll)/ },
+            { name: 'i18n', test: /node_modules[\\/](i18next|react-i18next)/ },
+            { name: 'gallery-meta', test: /src[\\/]gallery[\\/]items[\\/][^\\/]+[\\/]meta\.ts$/ },
+          ],
+        },
+      },
+    },
+  },
   worker: {
     format: 'es',
     plugins: () => [
