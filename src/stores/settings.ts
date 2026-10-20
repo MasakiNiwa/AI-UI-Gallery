@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import type { Extra, Stack } from '@/gallery/promptBuilder';
 
 export type ThemePreference = 'system' | 'light' | 'dark';
 export type LanguagePreference = 'auto' | 'en' | 'ja';
@@ -13,6 +14,10 @@ export interface SettingsState {
   reduceMotion: boolean;
   /** Card size in the gallery grid. */
   cardSize: 'large' | 'compact';
+  /** Tech stack the prompt builder rewrites prompts for. */
+  promptStack: Stack;
+  /** Extra requirements the prompt builder appends. */
+  promptExtras: Extra[];
   set: <K extends keyof SettingsValues>(key: K, value: SettingsValues[K]) => void;
   reset: () => void;
 }
@@ -25,6 +30,8 @@ export const DEFAULT_SETTINGS: SettingsValues = {
   livePreviews: true,
   reduceMotion: false,
   cardSize: 'large',
+  promptStack: 'original',
+  promptExtras: [],
 };
 
 /** Every localStorage key this app writes starts with this prefix (used by "Clear all data"). */

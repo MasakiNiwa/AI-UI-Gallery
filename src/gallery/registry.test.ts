@@ -25,6 +25,10 @@ describe('gallery registry', () => {
       for (const key of ['name', 'summary', 'description', 'prompt'] as const) {
         expect(text![key].trim(), `${item.id}.${lang}.${key}`).not.toBe('');
       }
+      // The prompt builder swaps the last line, so it must be the stack line.
+      const lastLine = text!.prompt.split('\n').at(-1)!;
+      if (lang === 'en') expect(lastLine, `${item.id} en stack line`).toMatch(/^Use /);
+      if (lang === 'ja') expect(lastLine, `${item.id} ja stack line`).toMatch(/てください。$/);
     }
   });
 

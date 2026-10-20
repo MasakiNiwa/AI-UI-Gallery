@@ -17,10 +17,10 @@ import { Link, useNavigate, useParams } from 'react-router';
 import { CategoryIcon } from '@/components/gallery/CategoryIcon';
 import { DemoRenderer } from '@/components/gallery/DemoRenderer';
 import { FavoriteButton } from '@/components/gallery/FavoriteButton';
+import { PromptPanel } from '@/components/gallery/PromptPanel';
 import { ItemGrid } from '@/components/gallery/ItemCard';
 import { Button } from '@/components/ui/Button';
 import { Chip } from '@/components/ui/Chip';
-import { CopyButton } from '@/components/ui/CopyButton';
 import { SegmentedControl } from '@/components/ui/SegmentedControl';
 import { getItem, ITEMS, itemText } from '@/gallery/registry';
 import { currentLanguage } from '@/i18n';
@@ -222,13 +222,7 @@ export function ItemPage() {
         </Tabs.Content>
         <Tabs.Content value="prompt" className="pt-5">
           <div className="flex flex-col gap-4">
-            <div className="flex items-start justify-between gap-3">
-              <p className="text-sm text-muted">{t('item.promptLead')}</p>
-              <CopyButton text={text.prompt} />
-            </div>
-            <pre className="rounded-2xl border border-line bg-surface p-4 font-sans text-sm leading-relaxed whitespace-pre-wrap">
-              {text.prompt}
-            </pre>
+            <PromptPanel prompt={text.prompt} lang={currentLanguage()} />
             {text.tips && text.tips.length > 0 && (
               <div>
                 <h3 className="mb-2 font-semibold">{t('item.tips')}</h3>

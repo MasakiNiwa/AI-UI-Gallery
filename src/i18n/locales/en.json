@@ -145,6 +145,7 @@
       "Open Gallery and browse by category, or type a keyword in the search box.",
       "Tap a card to see the live demo, an explanation, and the prompt.",
       "Press Copy on the Prompt tab and paste it into your AI assistant.",
+      "On the Prompt tab, pick your tech stack and extra requirements to tailor the prompt before copying it.",
       "Use the Clear button to reset the search and category filter."
     ],
     "promptTips": "Tips for writing prompts",
@@ -195,5 +196,19 @@
     "suggestions": "Suggestions",
     "navigate": "to navigate",
     "open": "to open"
+  },
+  "promptBuilder": {
+    "stack": "Tech stack",
+    "original": "As written",
+    "html": "HTML / CSS / JS",
+    "react": "React",
+    "vue": "Vue",
+    "svelte": "Svelte",
+    "extras": "Also ask for",
+    "a11y": "Accessibility",
+    "darkMode": "Dark mode",
+    "responsive": "Responsive",
+    "comments": "Code comments",
+    "addedNote": "Highlighted lines were added by your choices above."
   }
 }

@@ -120,3 +120,23 @@ test('compact card size is remembered', async ({ page }) => {
     'true',
   );
 });
+
+test('prompt builder rewrites the stack line and remembers the choice', async ({ page }, info) => {
+  const ja = info.project.name === 'mobile';
+  await page.goto('./#/item/ripple-button');
+  await page.getByRole('tab', { name: ja ? 'プロンプト' : 'Prompt' }).click();
+  const prompt = page.locator('pre');
+  await page.getByRole('radio', { name: 'Vue' }).click();
+  await expect(prompt).toContainText('Vue 3');
+  await expect(prompt).not.toContainText(
+    ja ? '素のHTML・CSS・JavaScriptで実装してください。' : 'Use plain HTML, CSS and JavaScript.',
+  );
+  await page
+    .getByRole('group', { name: ja ? '追加で依頼する' : 'Also ask for' })
+    .getByRole('button', { name: ja ? /ダークモード/ : /Dark mode/ })
+    .click();
+  await expect(prompt).toContainText('prefers-color-scheme');
+  await page.reload();
+  await page.getByRole('tab', { name: ja ? 'プロンプト' : 'Prompt' }).click();
+  await expect(page.getByRole('radio', { name: 'Vue' })).toHaveAttribute('aria-checked', 'true');
+});
