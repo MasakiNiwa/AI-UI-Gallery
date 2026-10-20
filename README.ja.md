@@ -27,6 +27,7 @@ npm install
 npm run dev        # 開発サーバーを起動
 npm run lint       # ESLint
 npm test           # ユニットテスト(Vitest)
+npm run test:e2e   # E2Eテスト(Playwright。先に `npm run build` を実行)
 npm run build      # 型チェックと dist/ へのビルド(THIRD_PARTY_NOTICES.md も再生成)
 npm run preview    # 本番ビルドを確認
 ```

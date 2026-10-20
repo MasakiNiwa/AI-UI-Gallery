@@ -26,6 +26,8 @@ export function QuickSearch({
   const recent = useLibrary((s) => s.recent);
   const [query, setQuery] = useState('');
   const [matched, setMatched] = useState<string[] | null>(null);
+  /** The query that `matched` belongs to, so Enter can tell whether results are still pending. */
+  const [searched, setSearched] = useState('');
   const [active, setActive] = useState(0);
   const listRef = useRef<HTMLUListElement>(null);
   const id = useId();
@@ -34,8 +36,15 @@ export function QuickSearch({
     const q = query.trim();
     let cancelled = false;
     const timer = setTimeout(() => {
-      if (!q) setMatched(null);
-      else void searchItems(q).then((ids) => !cancelled && setMatched(ids));
+      if (!q) {
+        setMatched(null);
+        setSearched('');
+      } else
+        void searchItems(q).then((ids) => {
+          if (cancelled) return;
+          setMatched(ids);
+          setSearched(q);
+        });
       setActive(0);
     }, 80);
     return () => {
@@ -64,6 +73,12 @@ export function QuickSearch({
     navigate(`/item/${item.id}`);
   };
 
+  const openGallery = (q: string) => {
+    onOpenChange(false);
+    setQuery('');
+    navigate(`/gallery?q=${encodeURIComponent(q)}`);
+  };
+
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
@@ -73,11 +88,16 @@ export function QuickSearch({
       setActive((a) => Math.max(a - 1, 0));
     } else if (e.key === 'Enter') {
       e.preventDefault();
-      if (results[active]) go(results[active]);
-      else if (query.trim()) {
-        onOpenChange(false);
-        navigate(`/gallery?q=${encodeURIComponent(query.trim())}`);
-      }
+      const q = query.trim();
+      if (q && q !== searched) {
+        // Typed faster than the debounce: search now instead of opening a stale suggestion.
+        void searchItems(q).then((ids) => {
+          const first = ids.length ? getItem(ids[0]) : undefined;
+          if (first) go(first);
+          else openGallery(q);
+        });
+      } else if (results[active]) go(results[active]);
+      else if (q) openGallery(q);
     }
   };
 
