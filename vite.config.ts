@@ -112,6 +112,9 @@ export default defineConfig({
     __REPO_URL__: JSON.stringify('https://github.com/MasakiNiwa/AI-UI-Gallery'),
   },
   build: {
+    // Heavy libraries used by a single demo (e.g. three.js) live in that demo's lazy chunk; only the
+    // entry chunks are loaded up front, so a larger limit for lazy chunks is fine.
+    chunkSizeWarningLimit: 600,
     rolldownOptions: {
       output: {
         // Long-lived vendor chunks cache well across deploys; gallery metadata grows with every new item.
