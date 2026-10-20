@@ -157,7 +157,7 @@
       "最初の結果を見てから、小さな修正を1つずつ依頼する。"
     ],
     "technology": "使用技術",
-    "technologyBody": "React・TypeScript・Viteで作り、Tailwind CSSでスタイリングし、GitHub Pagesで公開しています。検索はWeb Workerで実行するため入力中も動作が滑らかです。デモは必要なときに読み込み、一部のデモではWebGLでGPUを使ったり、OffscreenCanvasでWorker内に描画したりしています。",
+    "technologyBody": "React・TypeScript・Viteで作り、Tailwind CSSでスタイリングし、GitHub Pagesで公開しています。検索はWeb Workerで実行するため入力中も動作が滑らかです。デモは必要なときに読み込み、一部のデモではWebGLでGPUを使ったり、OffscreenCanvasでWorker内に描画したりしています。 アプリとしてインストールでき(PWA)、一度開けばオフラインでも使えます。",
     "source": "ソースコード",
     "sourceBody": "このアプリはオープンソースです。不具合の報告や提案はGitHubで受け付けています。",
     "openRepo": "GitHubリポジトリを開く",

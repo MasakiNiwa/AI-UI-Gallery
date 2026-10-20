@@ -157,7 +157,7 @@
       "Iterate: ask for small changes one at a time after the first result."
     ],
     "technology": "Technology",
-    "technologyBody": "Built with React, TypeScript and Vite, styled with Tailwind CSS, and published on GitHub Pages. Search runs in a Web Worker so typing stays smooth, demos are loaded on demand, and some demos use the GPU through WebGL or render in a worker with OffscreenCanvas.",
+    "technologyBody": "Built with React, TypeScript and Vite, styled with Tailwind CSS, and published on GitHub Pages. Search runs in a Web Worker so typing stays smooth, demos are loaded on demand, and some demos use the GPU through WebGL or render in a worker with OffscreenCanvas. The app can be installed (PWA) and keeps working offline after the first visit.",
     "source": "Source code",
     "sourceBody": "This app is open source. Bug reports and suggestions are welcome on GitHub.",
     "openRepo": "Open the GitHub repository",
