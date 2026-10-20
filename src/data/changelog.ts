@@ -14,6 +14,20 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.11.0',
+    date: '2026-10-21',
+    changes: {
+      en: [
+        'New Games category with Memory Match and 2048.',
+        '11 new UIs (77 in total), including @mention autocomplete, an inline-editable table, a donut chart, infinite scroll, an image lightbox and an audio visualizer.',
+      ],
+      ja: [
+        '「ゲーム」カテゴリを追加(神経衰弱、2048)。',
+        '11個のUIを追加(合計77個)。@メンション入力補完、その場で編集できる表、ドーナツグラフ、無限スクロール、画像ライトボックス、オーディオビジュアライザーなど。',
+      ],
+    },
+  },
+  {
     version: '0.10.0',
     date: '2026-10-21',
     changes: {

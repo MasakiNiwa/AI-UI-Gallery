@@ -3,6 +3,7 @@ import {
   BarChart3,
   Bell,
   Compass,
+  Gamepad2,
   LayoutDashboard,
   MousePointerClick,
   Sparkles,
@@ -23,6 +24,7 @@ export const CATEGORIES: { id: CategoryId; icon: LucideIcon }[] = [
   { id: 'animation', icon: Activity },
   { id: 'effects', icon: Sparkles },
   { id: 'layout', icon: LayoutDashboard },
+  { id: 'games', icon: Gamepad2 },
 ];
 
 export const categoryIcon = (id: CategoryId) => CATEGORIES.find((c) => c.id === id)!.icon;

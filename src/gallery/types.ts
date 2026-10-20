@@ -11,6 +11,7 @@ export const CATEGORY_IDS = [
   'animation',
   'effects',
   'layout',
+  'games',
 ] as const;
 export type CategoryId = (typeof CATEGORY_IDS)[number];
 
