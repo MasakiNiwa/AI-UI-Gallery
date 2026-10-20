@@ -104,7 +104,10 @@
     "fullscreen": "全画面",
     "exitFullscreen": "全画面を終了",
     "prev": "前へ",
-    "next": "次へ"
+    "next": "次へ",
+    "code": "コード",
+    "codeLoading": "ソースを読み込み中…",
+    "codeNote": "上のライブデモの実際のソースコードです(React・TypeScript・Tailwind CSS)。bg-surface や text-muted などのクラスはこのギャラリーのテーマ用なので、ご自身の色に置き換えてください。自分のプロジェクトで使う場合は、まず「プロンプト」タブから始めるのがおすすめです。"
   },
   "settings": {
     "title": "設定",

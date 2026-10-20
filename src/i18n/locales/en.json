@@ -104,7 +104,10 @@
     "fullscreen": "Fullscreen",
     "exitFullscreen": "Exit fullscreen",
     "prev": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "code": "Code",
+    "codeLoading": "Loading source…",
+    "codeNote": "This is the real source of the live demo above (React, TypeScript, Tailwind CSS). Classes such as bg-surface or text-muted come from this gallery's theme: replace them with your own colors. For your own project, the Prompt tab is usually the best starting point."
   },
   "settings": {
     "title": "Settings",

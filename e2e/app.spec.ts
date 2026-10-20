@@ -160,3 +160,14 @@ test('installable PWA works offline after the first visit', async ({ page, conte
   await expect(page.getByText(/could not be displayed|表示できませんでした/)).toHaveCount(0);
   await context.setOffline(false);
 });
+
+test('code tab shows the highlighted demo source', async ({ page }, info) => {
+  const ja = info.project.name === 'mobile';
+  await page.goto('./#/item/worker-particles');
+  await page.getByRole('tab', { name: ja ? 'コード' : 'Code' }).click();
+  const code = page.locator('.shiki');
+  await expect(code).toContainText('export default function Demo');
+  // Items with several files list them all; switching shows the other file.
+  await page.getByRole('tab', { name: 'sim.ts' }).click();
+  await expect(code).toContainText('createSim');
+});

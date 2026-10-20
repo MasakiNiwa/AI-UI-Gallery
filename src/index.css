@@ -125,3 +125,22 @@ body {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+/* Shiki dual-theme code blocks (see src/lib/highlight.ts) */
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+.shiki {
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  tab-size: 2;
+}
