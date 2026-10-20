@@ -29,7 +29,7 @@ A gallery of web UIs you can build by asking AI. Every exhibit is a **live, work
 | State    | [Zustand](https://zustand.docs.pmnd.rs/) (persisted to localStorage)                                                                        |
 | Search   | [Fuse.js](https://www.fusejs.io/) in a Web Worker via [Comlink](https://github.com/GoogleChromeLabs/comlink)                                |
 | Demos    | [three.js](https://threejs.org/) (3D), WebGL / WebGPU (WGSL), Canvas 2D, OffscreenCanvas                                                    |
-| Quality  | ESLint, Prettier, Vitest                                                                                                                    |
+| Quality  | ESLint, Prettier, Vitest, Playwright                                                                                                        |
 | Licenses | [rollup-plugin-license](https://github.com/mjeanroy/rollup-plugin-license)                                                                  |
 
 ## Development
@@ -41,6 +41,7 @@ npm install
 npm run dev        # start the dev server
 npm run lint       # ESLint
 npm test           # unit tests (Vitest)
+npm run test:e2e   # end-to-end tests (Playwright; run `npm run build` first)
 npm run build      # type-check and build into dist/ (also regenerates THIRD_PARTY_NOTICES.md)
 npm run preview    # serve the production build
 ```
