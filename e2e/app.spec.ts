@@ -140,3 +140,23 @@ test('prompt builder rewrites the stack line and remembers the choice', async ({
   await page.getByRole('tab', { name: ja ? 'プロンプト' : 'Prompt' }).click();
   await expect(page.getByRole('radio', { name: 'Vue' })).toHaveAttribute('aria-checked', 'true');
 });
+
+test('installable PWA works offline after the first visit', async ({ page, context }, info) => {
+  test.skip(info.project.name === 'mobile', 'covered once on desktop');
+  await page.goto('./');
+  await expect(page.locator('link[rel="manifest"]')).toHaveCount(1);
+  // Wait until the service worker has installed and controls the page.
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+    if (!navigator.serviceWorker.controller) {
+      await new Promise((r) =>
+        navigator.serviceWorker.addEventListener('controllerchange', r, { once: true }),
+      );
+    }
+  });
+  await context.setOffline(true);
+  await page.goto('./#/item/flip-card');
+  await expect(page.locator('h1')).toBeVisible();
+  await expect(page.getByText(/could not be displayed|表示できませんでした/)).toHaveCount(0);
+  await context.setOffline(false);
+});

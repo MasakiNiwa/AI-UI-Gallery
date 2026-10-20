@@ -52,6 +52,7 @@ AI UI Gallery bundles the following open-source packages:
 | [use-callback-ref](https://github.com/theKashey/use-callback-ref/) | 1.3.3 | MIT |
 | [use-sidecar](https://github.com/theKashey/use-sidecar) | 1.1.3 | MIT |
 | [use-sync-external-store](https://github.com/react/react) | 1.7.0 | MIT |
+| [workbox (service worker runtime)](https://github.com/GoogleChrome/workbox) | 7.4.1 | MIT |
 | [zustand](https://github.com/pmndrs/zustand) | 5.0.15 | MIT |
 
 ---
@@ -1593,6 +1594,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
+
+## workbox (service worker runtime)@7.4.1 (MIT)
+
+```
+Copyright 2018 Google LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 ```
 
 ## zustand@5.0.15 (MIT)

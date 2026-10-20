@@ -14,6 +14,7 @@ A gallery of web UIs you can build by asking AI. Every exhibit is a **live, work
 - Preview demos at full width or mobile width
 - Responsive: bottom navigation bar on phones, sidebar on desktop
 - Favorites, viewing history and app-wide quick search (⌘K / Ctrl+K)
+- Installable as an app (PWA) and usable offline after the first visit
 - Light / dark theme (calm, low-contrast dark palette)
 - Automatic language selection from your browser (English and Japanese)
 - GPU and parallelism showcases: WebGL shaders, three.js 3D, WebGPU compute shaders, OffscreenCanvas rendering in a Web Worker
