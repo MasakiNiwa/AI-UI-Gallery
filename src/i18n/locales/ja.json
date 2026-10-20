@@ -1,0 +1,163 @@
+{
+  "app": {
+    "name": "AI UIギャラリー",
+    "tagline": "AIで作れるUIを確認しよう"
+  },
+  "nav": {
+    "main": "メインナビゲーション",
+    "home": "ホーム",
+    "gallery": "ギャラリー",
+    "settings": "設定",
+    "help": "ヘルプ"
+  },
+  "header": {
+    "toLight": "ライトモードに切り替え",
+    "toDark": "ダークモードに切り替え",
+    "help": "ヘルプ"
+  },
+  "home": {
+    "heroTitle": "作りたいUIを見つけて、AIに依頼しよう",
+    "heroLead": "実際に動くWEBアプリUIの展示場です。それぞれのUIの名前・解説・AIへの依頼プロンプト例をまとめています。",
+    "browseAll": "ギャラリーを見る",
+    "itemsCount_one": "{{count}}件のUI",
+    "itemsCount_other": "{{count}}件のUI",
+    "categories": "カテゴリ",
+    "latest": "新着",
+    "seeAll": "すべて見る",
+    "howTitle": "使い方",
+    "how1Title": "見つける",
+    "how1Desc": "カテゴリやキーワードで、実際に動くUIを探せます。",
+    "how2Title": "名前を知る",
+    "how2Desc": "UIの名前を知っていると、AIへの依頼がぐっと正確になります。",
+    "how3Title": "プロンプトをコピー",
+    "how3Desc": "プロンプト例をAIに貼り付けて、自分のアプリに合わせて調整しましょう。"
+  },
+  "gallery": {
+    "title": "ギャラリー",
+    "searchPlaceholder": "UIを検索(名前・タグ・技術など)",
+    "searchLabel": "検索",
+    "clear": "クリア",
+    "clearSearch": "検索語を消す",
+    "clearAll": "検索と絞り込みをクリア",
+    "all": "すべて",
+    "filterByCategory": "カテゴリで絞り込み",
+    "results_one": "{{count}}件",
+    "results_other": "{{count}}件",
+    "noResults": "条件に合うUIが見つかりません。",
+    "noResultsHint": "別のキーワードを試すか、絞り込みをクリアしてください。",
+    "sort": "並び順",
+    "sortNewest": "新着順",
+    "sortName": "名前順",
+    "sortDifficulty": "難易度順"
+  },
+  "difficulty": {
+    "label": "難易度",
+    "easy": "かんたん",
+    "medium": "ふつう",
+    "hard": "上級"
+  },
+  "categories": {
+    "buttons": "ボタン",
+    "inputs": "入力・フォーム",
+    "cards": "カード",
+    "navigation": "ナビゲーション",
+    "feedback": "モーダル・通知",
+    "data": "データ表示",
+    "animation": "アニメーション",
+    "effects": "背景・エフェクト",
+    "layout": "レイアウト"
+  },
+  "item": {
+    "back": "戻る",
+    "demo": "ライブデモ",
+    "about": "解説",
+    "prompt": "プロンプト",
+    "promptLead": "これをAIアシスタントに貼り付けると、同じようなUIを作ってもらえます。",
+    "tips": "追加で依頼するときのアイデア",
+    "copy": "コピー",
+    "copied": "コピーしました",
+    "tech": "使用技術",
+    "tags": "タグ",
+    "category": "カテゴリ",
+    "viewport": "表示幅",
+    "viewportFull": "全幅",
+    "viewportMobile": "スマホ幅",
+    "reload": "デモを再起動",
+    "notFound": "このUIは見つかりませんでした。",
+    "loading": "デモを読み込み中…",
+    "error": "このデモを表示できませんでした。",
+    "retry": "再試行",
+    "related": "同じカテゴリのUI",
+    "open": "{{name}}を開く"
+  },
+  "settings": {
+    "title": "設定",
+    "appearance": "外観",
+    "theme": "テーマ",
+    "themeSystem": "システム",
+    "themeLight": "ライト",
+    "themeDark": "ダーク",
+    "language": "言語",
+    "languageLabel": "表示言語",
+    "languageAuto": "自動(ブラウザの設定)",
+    "languageHint": "自動ではブラウザの言語に合わせます。対応していない言語の場合は英語で表示します。",
+    "gallery": "ギャラリー",
+    "livePreviews": "カードでライブプレビュー",
+    "livePreviewsHint": "一覧のカードに実際に動く縮小デモを表示します。電池や通信量を節約したい場合はオフにしてください。",
+    "reduceMotion": "動きを減らす",
+    "reduceMotionHint": "アプリとデモのアニメーションを最小限にします。",
+    "data": "データ",
+    "clearTitle": "保存データをすべてクリア",
+    "clearDescription": "このブラウザに保存されている設定をすべて初期状態に戻します。",
+    "clearButton": "データをクリア",
+    "confirmTitle": "保存データをすべてクリアしますか?",
+    "confirmBody": "このブラウザに保存されている設定がすべてリセットされます。元に戻すことはできません。",
+    "cancel": "キャンセル",
+    "confirm": "クリア",
+    "cleared": "保存データをすべてクリアしました。"
+  },
+  "help": {
+    "title": "ヘルプ",
+    "version": "バージョン",
+    "build": "ビルド日時",
+    "commit": "コミット",
+    "license": "ライセンス",
+    "about": "このアプリについて",
+    "aboutBody": "AI UIギャラリーは、AIアシスタントに依頼して作れるWEBアプリUIの展示場です。展示しているUIはすべて実際に動くデモで、一般的な名前・解説・プロンプト例を添えています。アイデア探しや、AIへの依頼を正確にするための「UIの名前」を覚えるのに役立ててください。",
+    "howToUse": "使い方",
+    "howToUseItems": [
+      "「ギャラリー」を開き、カテゴリから探すか、検索ボックスにキーワードを入力します。",
+      "カードをタップすると、ライブデモ・解説・プロンプトが表示されます。",
+      "「プロンプト」タブの「コピー」を押して、AIアシスタントに貼り付けます。",
+      "「クリア」ボタンで検索とカテゴリの絞り込みをリセットできます。"
+    ],
+    "promptTips": "プロンプトを書くコツ",
+    "promptTipsItems": [
+      "UIの名前を伝える(例:「トースト通知」「ベントーグリッド」)。",
+      "使う技術を伝える:素のHTML/CSS/JS、React、Vue、Tailwind CSSなど。",
+      "動きを具体的に書く:状態、アニメーション、キーボードやタッチ操作への対応。",
+      "必要ならアクセシビリティやダークモード対応も明記する。",
+      "最初の結果を見てから、小さな修正を1つずつ依頼する。"
+    ],
+    "technology": "使用技術",
+    "technologyBody": "React・TypeScript・Viteで作り、Tailwind CSSでスタイリングし、GitHub Pagesで公開しています。検索はWeb Workerで実行するため入力中も動作が滑らかです。デモは必要なときに読み込み、一部のデモではWebGLでGPUを使ったり、OffscreenCanvasでWorker内に描画したりしています。",
+    "source": "ソースコード",
+    "sourceBody": "このアプリはオープンソースです。不具合の報告や提案はGitHubで受け付けています。",
+    "openRepo": "GitHubリポジトリを開く",
+    "credits": "クレジット・サードパーティライセンス",
+    "creditsBody": "このアプリは以下のオープンソースソフトウェアを利用しています。作者の皆様に感謝いたします。",
+    "creditsLoading": "一覧を読み込み中…",
+    "creditsUnavailable": "ライセンス一覧はビルド時に生成されるため、開発モードでは表示されません。リポジトリの THIRD_PARTY_NOTICES.md をご覧ください。",
+    "showLicense": "ライセンス全文を表示",
+    "appLicense": "このアプリのライセンス",
+    "appLicenseBody": "AI UIギャラリーはMITライセンスで公開しています。ギャラリー内のプロンプト例やデモコードは、ご自身のプロジェクトで自由にお使いいただけます。"
+  },
+  "notFound": {
+    "title": "ページが見つかりません",
+    "body": "お探しのページは存在しません。",
+    "home": "ホームへ"
+  },
+  "common": {
+    "close": "閉じる"
+  }
+}

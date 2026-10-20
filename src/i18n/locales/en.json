@@ -1,0 +1,163 @@
+{
+  "app": {
+    "name": "AI UI Gallery",
+    "tagline": "See what UIs you can build with AI"
+  },
+  "nav": {
+    "main": "Main navigation",
+    "home": "Home",
+    "gallery": "Gallery",
+    "settings": "Settings",
+    "help": "Help"
+  },
+  "header": {
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode",
+    "help": "Help"
+  },
+  "home": {
+    "heroTitle": "Find the UI you want, then ask AI to build it",
+    "heroLead": "A gallery of working web UIs. Each one comes with its name, an explanation, and an example prompt you can paste into an AI assistant.",
+    "browseAll": "Browse the gallery",
+    "itemsCount_one": "{{count}} UI",
+    "itemsCount_other": "{{count}} UIs",
+    "categories": "Categories",
+    "latest": "Recently added",
+    "seeAll": "See all",
+    "howTitle": "How to use",
+    "how1Title": "Explore",
+    "how1Desc": "Browse live demos by category or search by keyword.",
+    "how2Title": "Learn the name",
+    "how2Desc": "Knowing what a UI is called makes your requests to AI much more precise.",
+    "how3Title": "Copy the prompt",
+    "how3Desc": "Paste the example prompt into your AI assistant and adjust it to fit your app."
+  },
+  "gallery": {
+    "title": "Gallery",
+    "searchPlaceholder": "Search UIs (name, tag, technology…)",
+    "searchLabel": "Search",
+    "clear": "Clear",
+    "clearSearch": "Clear search",
+    "clearAll": "Clear search and filters",
+    "all": "All",
+    "filterByCategory": "Filter by category",
+    "results_one": "{{count}} result",
+    "results_other": "{{count}} results",
+    "noResults": "No UIs match your search.",
+    "noResultsHint": "Try another keyword or clear the filters.",
+    "sort": "Sort",
+    "sortNewest": "Newest",
+    "sortName": "Name",
+    "sortDifficulty": "Difficulty"
+  },
+  "difficulty": {
+    "label": "Difficulty",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Advanced"
+  },
+  "categories": {
+    "buttons": "Buttons",
+    "inputs": "Inputs & Forms",
+    "cards": "Cards",
+    "navigation": "Navigation",
+    "feedback": "Modals & Notifications",
+    "data": "Data Display",
+    "animation": "Animation",
+    "effects": "Backgrounds & Effects",
+    "layout": "Layout"
+  },
+  "item": {
+    "back": "Back",
+    "demo": "Live demo",
+    "about": "About",
+    "prompt": "Prompt",
+    "promptLead": "Paste this into an AI assistant to build a similar UI.",
+    "tips": "Ideas for follow-up prompts",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "tech": "Technology",
+    "tags": "Tags",
+    "category": "Category",
+    "viewport": "Preview width",
+    "viewportFull": "Full width",
+    "viewportMobile": "Mobile width",
+    "reload": "Restart demo",
+    "notFound": "This UI could not be found.",
+    "loading": "Loading demo…",
+    "error": "This demo could not be displayed.",
+    "retry": "Retry",
+    "related": "More in this category",
+    "open": "Open {{name}}"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "language": "Language",
+    "languageLabel": "Display language",
+    "languageAuto": "Automatic (browser setting)",
+    "languageHint": "Automatic follows your browser's language. Unsupported languages fall back to English.",
+    "gallery": "Gallery",
+    "livePreviews": "Live previews in cards",
+    "livePreviewsHint": "Show working mini demos in the gallery list. Turn off to save battery and data.",
+    "reduceMotion": "Reduce motion",
+    "reduceMotionHint": "Minimize animations in the app and demos.",
+    "data": "Data",
+    "clearTitle": "Clear all saved data",
+    "clearDescription": "Resets every setting stored in this browser to its default.",
+    "clearButton": "Clear data",
+    "confirmTitle": "Clear all saved data?",
+    "confirmBody": "All settings saved in this browser will be reset. This cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Clear",
+    "cleared": "All saved data has been cleared."
+  },
+  "help": {
+    "title": "Help",
+    "version": "Version",
+    "build": "Built",
+    "commit": "Commit",
+    "license": "License",
+    "about": "About this app",
+    "aboutBody": "AI UI Gallery is a showcase of web UIs you can build by asking an AI assistant. Every exhibit is a working demo with its common name, an explanation, and an example prompt. Use it to find inspiration and to learn the vocabulary that makes AI requests precise.",
+    "howToUse": "How to use",
+    "howToUseItems": [
+      "Open Gallery and browse by category, or type a keyword in the search box.",
+      "Tap a card to see the live demo, an explanation, and the prompt.",
+      "Press Copy on the Prompt tab and paste it into your AI assistant.",
+      "Use the Clear button to reset the search and category filter."
+    ],
+    "promptTips": "Tips for writing prompts",
+    "promptTipsItems": [
+      "Name the UI pattern (e.g. \"toast notification\", \"bento grid\").",
+      "State your tech stack: plain HTML/CSS/JS, React, Vue, Tailwind CSS…",
+      "Describe behavior: states, animations, keyboard and touch support.",
+      "Mention accessibility and dark mode if you need them.",
+      "Iterate: ask for small changes one at a time after the first result."
+    ],
+    "technology": "Technology",
+    "technologyBody": "Built with React, TypeScript and Vite, styled with Tailwind CSS, and published on GitHub Pages. Search runs in a Web Worker so typing stays smooth, demos are loaded on demand, and some demos use the GPU through WebGL or render in a worker with OffscreenCanvas.",
+    "source": "Source code",
+    "sourceBody": "This app is open source. Bug reports and suggestions are welcome on GitHub.",
+    "openRepo": "Open the GitHub repository",
+    "credits": "Credits & third-party licenses",
+    "creditsBody": "This app is made possible by the following open-source software. Thank you to all the authors.",
+    "creditsLoading": "Loading list…",
+    "creditsUnavailable": "The license list is generated at build time and is not available in development mode. See THIRD_PARTY_NOTICES.md in the repository.",
+    "showLicense": "Show license text",
+    "appLicense": "License of this app",
+    "appLicenseBody": "AI UI Gallery is released under the MIT License. Example prompts and demo code in the gallery may be used freely in your own projects."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist.",
+    "home": "Go to home"
+  },
+  "common": {
+    "close": "Close"
+  }
+}

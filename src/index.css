@@ -1,0 +1,127 @@
+@import 'tailwindcss';
+
+/* Class-based dark mode: <html class="dark"> is managed by the settings store. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens. Every app color comes from these variables so the palette can be tuned in one place.
+ * Dark mode deliberately uses low-contrast, low-saturation colors for a calm look.
+ */
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --surface-2: #f0f0ec;
+  --surface-3: #e7e7e2;
+  --border: #e2e2dd;
+  --text: #1f2328;
+  --text-muted: #626973;
+  --accent: #4a5f86;
+  --accent-soft: #e4e9f2;
+  --accent-contrast: #ffffff;
+  --danger: #a5483f;
+  --danger-soft: #f6e5e2;
+  --success: #3f7a5a;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 16px rgb(0 0 0 / 0.04);
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #14161a;
+  --surface: #1a1d22;
+  --surface-2: #20242a;
+  --surface-3: #282c33;
+  --border: #2b3037;
+  --text: #d5d8dd;
+  --text-muted: #8a919b;
+  --accent: #8a9cbf;
+  --accent-soft: #252c39;
+  --accent-contrast: #14161a;
+  --danger: #c7837b;
+  --danger-soft: #3a2725;
+  --success: #86b39a;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--border);
+  --color-fg: var(--text);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --shadow-card: var(--shadow);
+  --font-sans:
+    system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
+    'Noto Sans JP', Meiryo, sans-serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Respect the in-app "reduce motion" setting as well as the OS preference. */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* Radix accordion open/close animation */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+.accordion-content[data-state='open'] {
+  animation: accordion-down 200ms ease-out;
+}
+.accordion-content[data-state='closed'] {
+  animation: accordion-up 200ms ease-out;
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
