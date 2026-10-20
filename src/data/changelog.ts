@@ -14,6 +14,18 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.10.0',
+    date: '2026-10-21',
+    changes: {
+      en: [
+        'New Code tab on every UI: read the real, syntax-highlighted source of the live demo and copy it.',
+      ],
+      ja: [
+        '各UIに「コード」タブを追加:ライブデモの実際のソースコードをシンタックスハイライト付きで読んでコピーできます。',
+      ],
+    },
+  },
+  {
     version: '0.9.0',
     date: '2026-10-20',
     changes: {

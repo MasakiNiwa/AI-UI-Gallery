@@ -7,6 +7,11 @@ import type { DemoComponent, GalleryItem, ItemMeta, ItemText } from './types';
  */
 const metaModules = import.meta.glob<{ default: ItemMeta }>('./items/*/meta.ts', { eager: true });
 const demoModules = import.meta.glob<{ default: DemoComponent }>('./items/*/Demo.tsx');
+/** Raw source of every file in an item folder except its metadata, for the Code tab (loaded on demand). */
+const sourceModules = import.meta.glob<string>(['./items/*/*.{ts,tsx}', '!./items/*/meta.ts'], {
+  query: '?raw',
+  import: 'default',
+});
 
 const folderOf = (path: string) => path.split('/').at(-2)!;
 
@@ -22,6 +27,17 @@ export const ITEMS: GalleryItem[] = Object.entries(metaModules)
 const byId = new Map(ITEMS.map((item) => [item.id, item]));
 
 export const getItem = (id: string) => byId.get(id);
+
+/** Loads the demo's source files (Demo.tsx first), keyed by file name. */
+export async function loadItemSources(id: string): Promise<{ name: string; code: string }[]> {
+  const entries = Object.entries(sourceModules).filter(([path]) => folderOf(path) === id);
+  const files = await Promise.all(
+    entries.map(async ([path, load]) => ({ name: path.split('/').at(-1)!, code: await load() })),
+  );
+  return files.sort((a, b) =>
+    a.name === 'Demo.tsx' ? -1 : b.name === 'Demo.tsx' ? 1 : a.name.localeCompare(b.name),
+  );
+}
 
 export const itemText = (item: ItemMeta, lang: Language): ItemText =>
   item.text[lang] ?? item.text.en;

@@ -18,6 +18,7 @@ import { CategoryIcon } from '@/components/gallery/CategoryIcon';
 import { DemoRenderer } from '@/components/gallery/DemoRenderer';
 import { FavoriteButton } from '@/components/gallery/FavoriteButton';
 import { PromptPanel } from '@/components/gallery/PromptPanel';
+import { CodePanel } from '@/components/gallery/CodePanel';
 import { ItemGrid } from '@/components/gallery/ItemCard';
 import { Button } from '@/components/ui/Button';
 import { Chip } from '@/components/ui/Chip';
@@ -204,6 +205,9 @@ export function ItemPage() {
           <Tabs.Trigger value="prompt" className={tabClass}>
             {t('item.prompt')}
           </Tabs.Trigger>
+          <Tabs.Trigger value="code" className={tabClass}>
+            {t('item.code')}
+          </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="about" className="pt-5">
           <div className="flex flex-col gap-4 leading-relaxed">
@@ -234,6 +238,9 @@ export function ItemPage() {
               </div>
             )}
           </div>
+        </Tabs.Content>
+        <Tabs.Content value="code" className="pt-5">
+          <CodePanel id={item.id} />
         </Tabs.Content>
       </Tabs.Root>
 
