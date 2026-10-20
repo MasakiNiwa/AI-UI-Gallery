@@ -167,7 +167,9 @@
     "creditsUnavailable": "The license list is generated at build time and is not available in development mode. See THIRD_PARTY_NOTICES.md in the repository.",
     "showLicense": "Show license text",
     "appLicense": "License of this app",
-    "appLicenseBody": "AI UI Gallery is released under the MIT License. Example prompts and demo code in the gallery may be used freely in your own projects."
+    "appLicenseBody": "AI UI Gallery is released under the MIT License. Example prompts and demo code in the gallery may be used freely in your own projects.",
+    "changelog": "What's new",
+    "current": "Current"
   },
   "notFound": {
     "title": "Page not found",

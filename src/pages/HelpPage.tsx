@@ -1,9 +1,21 @@
-import { BookOpen, Code, Cpu, ExternalLink, Heart, Info, Lightbulb, Scale } from 'lucide-react';
+import {
+  BookOpen,
+  Code,
+  Cpu,
+  ExternalLink,
+  Heart,
+  History,
+  Info,
+  Lightbulb,
+  Scale,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Logo } from '@/components/layout/Logo';
 import { Accordion, AccordionSection } from '@/components/ui/Accordion';
 import { buttonClass } from '@/components/ui/buttonClass';
+import { CHANGELOG } from '@/data/changelog';
+import { currentLanguage } from '@/i18n';
 import { APP_INFO } from '@/lib/appInfo';
 
 interface LicenseEntry {
@@ -109,6 +121,30 @@ export function HelpPage() {
       <Accordion>
         <AccordionSection value="about" title={t('help.about')} icon={Info}>
           <p>{t('help.aboutBody')}</p>
+        </AccordionSection>
+        <AccordionSection value="changelog" title={t('help.changelog')} icon={History}>
+          <ol className="space-y-4">
+            {CHANGELOG.map((entry) => (
+              <li key={entry.version}>
+                <p className="flex items-baseline gap-2">
+                  <span className="font-mono font-semibold">v{entry.version}</span>
+                  {entry.version === APP_INFO.version && (
+                    <span className="rounded-full bg-accent-soft px-2 text-xs text-accent">
+                      {t('help.current')}
+                    </span>
+                  )}
+                  <time dateTime={entry.date} className="text-xs text-muted">
+                    {new Date(entry.date).toLocaleDateString(i18n.language)}
+                  </time>
+                </p>
+                <ul className="mt-1 list-disc space-y-0.5 pl-5 text-muted">
+                  {entry.changes[currentLanguage()].map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
         </AccordionSection>
         <AccordionSection value="how" title={t('help.howToUse')} icon={BookOpen}>
           <BulletList items={list('help.howToUseItems')} />
