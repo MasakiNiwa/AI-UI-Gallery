@@ -8,12 +8,14 @@
     "home": "Home",
     "gallery": "Gallery",
     "settings": "Settings",
-    "help": "Help"
+    "help": "Help",
+    "favorites": "Favorites"
   },
   "header": {
     "toLight": "Switch to light mode",
     "toDark": "Switch to dark mode",
-    "help": "Help"
+    "help": "Help",
+    "search": "Search"
   },
   "home": {
     "heroTitle": "Find the UI you want, then ask AI to build it",
@@ -30,7 +32,9 @@
     "how2Title": "Learn the name",
     "how2Desc": "Knowing what a UI is called makes your requests to AI much more precise.",
     "how3Title": "Copy the prompt",
-    "how3Desc": "Paste the example prompt into your AI assistant and adjust it to fit your app."
+    "how3Desc": "Paste the example prompt into your AI assistant and adjust it to fit your app.",
+    "surprise": "Surprise me",
+    "recent": "Continue where you left off"
   },
   "gallery": {
     "title": "Gallery",
@@ -88,7 +92,13 @@
     "error": "This demo could not be displayed.",
     "retry": "Retry",
     "related": "More in this category",
-    "open": "Open {{name}}"
+    "open": "Open {{name}}",
+    "share": "Share",
+    "shareCopied": "Link copied!",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "prev": "Previous",
+    "next": "Next"
   },
   "settings": {
     "title": "Settings",
@@ -108,10 +118,10 @@
     "reduceMotionHint": "Minimize animations in the app and demos.",
     "data": "Data",
     "clearTitle": "Clear all saved data",
-    "clearDescription": "Resets every setting stored in this browser to its default.",
+    "clearDescription": "Resets every setting, your favorites and viewing history stored in this browser.",
     "clearButton": "Clear data",
     "confirmTitle": "Clear all saved data?",
-    "confirmBody": "All settings saved in this browser will be reset. This cannot be undone.",
+    "confirmBody": "All settings, favorites and history saved in this browser will be reset. This cannot be undone.",
     "cancel": "Cancel",
     "confirm": "Clear",
     "cleared": "All saved data has been cleared."
@@ -159,5 +169,25 @@
   },
   "common": {
     "close": "Close"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "add": "Add {{name}} to favorites",
+    "remove": "Remove {{name}} from favorites",
+    "save": "Favorite",
+    "saved": "Favorited",
+    "empty": "No favorites yet.",
+    "emptyHint": "Tap the heart on any UI to keep it here.",
+    "recent": "Recently viewed",
+    "clearRecent": "Clear history",
+    "noRecent": "UIs you open will appear here."
+  },
+  "quickSearch": {
+    "title": "Search UIs",
+    "results": "Results",
+    "recent": "Recently viewed",
+    "suggestions": "Suggestions",
+    "navigate": "to navigate",
+    "open": "to open"
   }
 }

@@ -1,10 +1,22 @@
 import * as Tabs from '@radix-ui/react-tabs';
-import { ArrowLeft, Monitor, RotateCcw, Smartphone } from 'lucide-react';
-import { useState } from 'react';
+import {
+  ArrowLeft,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  Minimize2,
+  Monitor,
+  RotateCcw,
+  Share2,
+  Smartphone,
+} from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router';
 import { CategoryIcon } from '@/components/gallery/CategoryIcon';
 import { DemoRenderer } from '@/components/gallery/DemoRenderer';
+import { FavoriteButton } from '@/components/gallery/FavoriteButton';
 import { ItemGrid } from '@/components/gallery/ItemCard';
 import { Button } from '@/components/ui/Button';
 import { Chip } from '@/components/ui/Chip';
@@ -13,6 +25,7 @@ import { SegmentedControl } from '@/components/ui/SegmentedControl';
 import { getItem, ITEMS, itemText } from '@/gallery/registry';
 import { currentLanguage } from '@/i18n';
 import { cn } from '@/lib/cn';
+import { useLibrary } from '@/stores/library';
 import { NotFoundPage } from './NotFoundPage';
 
 type Viewport = 'full' | 'mobile';
@@ -27,11 +40,54 @@ export function ItemPage() {
   const [viewport, setViewport] = useState<Viewport>('full');
   const [runKey, setRunKey] = useState(0);
   const item = getItem(id);
+  const addRecent = useLibrary((s) => s.addRecent);
+  const stageRef = useRef<HTMLElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [shared, setShared] = useState(false);
+
+  useEffect(() => {
+    if (item) addRecent(item.id);
+  }, [item, addRecent]);
+
+  useEffect(() => {
+    const onChange = () => setIsFullscreen(document.fullscreenElement === stageRef.current);
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!shared) return;
+    const timer = setTimeout(() => setShared(false), 1800);
+    return () => clearTimeout(timer);
+  }, [shared]);
 
   if (!item) return <NotFoundPage message={t('item.notFound')} />;
 
   const text = itemText(item, currentLanguage());
   const related = ITEMS.filter((i) => i.category === item.category && i.id !== item.id).slice(0, 3);
+  const index = ITEMS.indexOf(item);
+  const prev = ITEMS[(index - 1 + ITEMS.length) % ITEMS.length];
+  const next = ITEMS[(index + 1) % ITEMS.length];
+
+  const share = async () => {
+    const url = window.location.href;
+    if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+      try {
+        await navigator.share({ title: text.name, text: text.summary, url });
+        return;
+      } catch {
+        // Cancelled or unsupported: fall back to copying the link.
+      }
+    }
+    await navigator.clipboard?.writeText(url).catch(() => {});
+    setShared(true);
+  };
+
+  const toggleFullscreen = () => {
+    if (document.fullscreenElement) void document.exitFullscreen();
+    else void stageRef.current?.requestFullscreen?.();
+  };
+  const canFullscreen = typeof document !== 'undefined' && document.fullscreenEnabled;
 
   return (
     <article className="flex flex-col gap-6">
@@ -44,7 +100,30 @@ export function ItemPage() {
           <ArrowLeft className="size-4" aria-hidden />
           {t('item.back')}
         </button>
-        <h1 className="text-2xl font-bold sm:text-3xl">{text.name}</h1>
+        <div className="flex items-start justify-between gap-3">
+          <h1 className="text-2xl font-bold sm:text-3xl">{text.name}</h1>
+          <div className="flex shrink-0 items-center gap-1">
+            <FavoriteButton
+              id={item.id}
+              name={text.name}
+              withLabel
+              className="h-9 border border-line px-3"
+            />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={share}
+              aria-label={t('item.share')}
+              title={shared ? t('item.shareCopied') : t('item.share')}
+              className="h-9 w-9"
+            >
+              {shared ? <Check className="size-4 text-success" /> : <Share2 className="size-4" />}
+            </Button>
+            <span className="sr-only" aria-live="polite">
+              {shared ? t('item.shareCopied') : ''}
+            </span>
+          </div>
+        </div>
         <p className="mt-2 text-muted">{text.summary}</p>
         <div className="mt-3 flex flex-wrap gap-1.5">
           <Link to={`/gallery?category=${item.category}`}>
@@ -90,12 +169,25 @@ export function ItemPage() {
             >
               <RotateCcw className="size-4" />
             </Button>
+            {canFullscreen && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleFullscreen}
+                aria-label={isFullscreen ? t('item.exitFullscreen') : t('item.fullscreen')}
+                title={isFullscreen ? t('item.exitFullscreen') : t('item.fullscreen')}
+              >
+                {isFullscreen ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
+              </Button>
+            )}
           </div>
         </div>
-        <div className="bg-surface-2 p-3 sm:p-4">
+        <div className="flex-1 bg-surface-2 p-3 sm:p-4">
           <div
             className={cn(
-              '@container mx-auto h-[min(70vh,560px)] overflow-hidden rounded-xl border border-line bg-bg transition-[max-width] duration-300',
+              '@container mx-auto',
+              isFullscreen ? 'h-full' : 'h-[min(70vh,560px)]',
+              'overflow-hidden rounded-xl border border-line bg-bg transition-[max-width] duration-300',
               viewport === 'mobile' ? 'max-w-[390px]' : 'max-w-full',
             )}
           >
@@ -150,6 +242,31 @@ export function ItemPage() {
           </div>
         </Tabs.Content>
       </Tabs.Root>
+
+      <nav aria-label={t('item.prev') + ' / ' + t('item.next')} className="grid grid-cols-2 gap-3">
+        {(
+          [
+            { to: prev, label: t('item.prev'), dir: 'prev' },
+            { to: next, label: t('item.next'), dir: 'next' },
+          ] as const
+        ).map(({ to, label, dir }) => (
+          <Link
+            key={dir}
+            to={`/item/${to.id}`}
+            className={cn(
+              'flex flex-col gap-0.5 rounded-2xl border border-line bg-surface p-4 transition-colors hover:border-accent/40',
+              dir === 'prev' ? 'items-start text-left' : 'items-end text-right',
+            )}
+          >
+            <span className="flex items-center gap-1 text-xs text-muted">
+              {dir === 'prev' && <ChevronLeft className="size-3.5" aria-hidden />}
+              {label}
+              {dir === 'next' && <ChevronRight className="size-3.5" aria-hidden />}
+            </span>
+            <span className="line-clamp-1 font-medium">{itemText(to, currentLanguage()).name}</span>
+          </Link>
+        ))}
+      </nav>
 
       {related.length > 0 && (
         <section aria-labelledby="related">
