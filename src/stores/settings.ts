@@ -47,4 +47,6 @@ export function clearAllStoredData() {
     // Storage may be unavailable (private mode); nothing to clear.
   }
   useSettings.getState().reset();
+  // Imported lazily to avoid a circular import (library.ts uses STORAGE_PREFIX from this file).
+  void import('./library').then(({ useLibrary }) => useLibrary.getState().reset());
 }

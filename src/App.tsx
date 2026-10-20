@@ -1,5 +1,6 @@
 import { HashRouter, Route, Routes } from 'react-router';
 import { AppLayout } from './components/layout/AppLayout';
+import { FavoritesPage } from './pages/FavoritesPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { HelpPage } from './pages/HelpPage';
 import { HomePage } from './pages/HomePage';
@@ -16,6 +17,7 @@ export function App() {
           <Route index element={<HomePage />} />
           <Route path="gallery" element={<GalleryPage />} />
           <Route path="item/:id" element={<ItemPage />} />
+          <Route path="favorites" element={<FavoritesPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="help" element={<HelpPage />} />
           <Route path="*" element={<NotFoundPage />} />

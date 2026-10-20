@@ -1,10 +1,12 @@
-import { ArrowRight, BookOpen, Copy, Search } from 'lucide-react';
+import { ArrowRight, BookOpen, Copy, Search, Shuffle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { ItemGrid } from '@/components/gallery/ItemCard';
 import { buttonClass } from '@/components/ui/buttonClass';
 import { CATEGORIES } from '@/gallery/categories';
-import { ITEMS } from '@/gallery/registry';
+import { getItem, ITEMS } from '@/gallery/registry';
+import type { GalleryItem } from '@/gallery/types';
+import { useLibrary } from '@/stores/library';
 
 const STEPS = [
   { icon: Search, title: 'home.how1Title', desc: 'home.how1Desc' },
@@ -14,7 +16,13 @@ const STEPS = [
 
 export function HomePage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const latest = ITEMS.slice(0, 6);
+  const recent = useLibrary((s) => s.recent)
+    .map(getItem)
+    .filter((i): i is GalleryItem => Boolean(i))
+    .slice(0, 3);
+  const surprise = () => navigate(`/item/${ITEMS[Math.floor(Math.random() * ITEMS.length)].id}`);
 
   return (
     <div className="flex flex-col gap-10">
@@ -26,11 +34,31 @@ export function HomePage() {
           {t('home.heroTitle')}
         </h1>
         <p className="mt-3 max-w-2xl text-muted">{t('home.heroLead')}</p>
-        <Link to="/gallery" className={buttonClass('primary', 'md', 'mt-6')}>
-          {t('home.browseAll')}
-          <ArrowRight className="size-4" aria-hidden />
-        </Link>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <Link to="/gallery" className={buttonClass('primary')}>
+            {t('home.browseAll')}
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
+          <button type="button" onClick={surprise} className={buttonClass('secondary')}>
+            <Shuffle className="size-4" aria-hidden />
+            {t('home.surprise')}
+          </button>
+        </div>
       </section>
+
+      {recent.length > 0 && (
+        <section aria-labelledby="home-recent">
+          <div className="mb-3 flex items-baseline justify-between">
+            <h2 id="home-recent" className="text-lg font-semibold">
+              {t('home.recent')}
+            </h2>
+            <Link to="/favorites" className="text-sm text-accent hover:underline">
+              {t('home.seeAll')}
+            </Link>
+          </div>
+          <ItemGrid items={recent} />
+        </section>
+      )}
 
       <section aria-labelledby="home-categories">
         <h2 id="home-categories" className="mb-3 text-lg font-semibold">

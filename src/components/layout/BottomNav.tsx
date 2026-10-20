@@ -10,7 +10,7 @@ export function BottomNav() {
       aria-label={t('nav.main')}
       className="pb-safe fixed inset-x-0 bottom-0 z-40 border-t border-line bg-bg/90 backdrop-blur-md md:hidden"
     >
-      <ul className="grid grid-cols-3">
+      <ul className="grid grid-cols-4">
         {NAV_ITEMS.map(({ to, labelKey, icon: Icon, end }) => (
           <li key={to}>
             <NavLink

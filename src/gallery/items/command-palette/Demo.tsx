@@ -57,11 +57,13 @@ export default function Demo({ mode }: DemoProps) {
     const onKey = (e: globalThis.KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
+        e.stopPropagation(); // keep the app's own ⌘K quick search from opening too
         setOpen((o) => !o);
       }
     };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    // Capture phase on document runs before the app's window listener.
+    document.addEventListener('keydown', onKey, true);
+    return () => document.removeEventListener('keydown', onKey, true);
   }, [mode]);
 
   const results = useMemo(() => {
