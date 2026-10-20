@@ -82,6 +82,12 @@ Add `src/i18n/locales/<lang>.json` (same keys as `en.json`, enforced by tests), 
 `src/i18n/languages.ts` and `src/i18n/index.ts`, add its name in the settings page, and add `text.<lang>` to
 items (missing item texts fall back to English).
 
+## Releasing
+
+For every user-visible change, bump `version` in `package.json` (minor for features, patch for fixes) and add an
+entry at the top of `src/data/changelog.ts` (English and Japanese). The version and history are shown on the Help
+page, and a unit test fails if the two get out of sync.
+
 ## Deployment
 
 Pushing to `main` builds the site and deploys it to GitHub Pages with GitHub Actions

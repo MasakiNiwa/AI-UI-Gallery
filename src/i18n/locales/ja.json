@@ -167,7 +167,9 @@
     "creditsUnavailable": "ライセンス一覧はビルド時に生成されるため、開発モードでは表示されません。リポジトリの THIRD_PARTY_NOTICES.md をご覧ください。",
     "showLicense": "ライセンス全文を表示",
     "appLicense": "このアプリのライセンス",
-    "appLicenseBody": "AI UIギャラリーはMITライセンスで公開しています。ギャラリー内のプロンプト例やデモコードは、ご自身のプロジェクトで自由にお使いいただけます。"
+    "appLicenseBody": "AI UIギャラリーはMITライセンスで公開しています。ギャラリー内のプロンプト例やデモコードは、ご自身のプロジェクトで自由にお使いいただけます。",
+    "changelog": "更新履歴",
+    "current": "現在のバージョン"
   },
   "notFound": {
     "title": "ページが見つかりません",

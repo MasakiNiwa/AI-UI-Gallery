@@ -52,6 +52,12 @@ npm run preview    # 本番ビルドを確認
 `src/i18n/languages.ts` と `src/i18n/index.ts` に登録し、設定ページに言語名を追加します。各UIの `text.<lang>` が
 ない場合は英語で表示されます。
 
+## リリースの手順
+
+利用者に見える変更をするときは、`package.json` の `version` を上げ(機能追加はマイナー、修正はパッチ)、
+`src/data/changelog.ts` の先頭に英語・日本語の項目を追加します。バージョンと更新履歴はヘルプページに表示され、
+両者がずれているとユニットテストが失敗します。
+
 ## 公開
 
 `main` にpushすると、GitHub Actions(`.github/workflows/deploy.yml`)でビルドしてGitHub Pagesに公開します。
