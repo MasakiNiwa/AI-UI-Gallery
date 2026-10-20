@@ -52,7 +52,13 @@
     "sort": "並び順",
     "sortNewest": "新着順",
     "sortName": "名前順",
-    "sortDifficulty": "難易度順"
+    "sortDifficulty": "難易度順",
+    "anyDifficulty": "すべての難易度",
+    "tech": "使用技術",
+    "anyTech": "すべての技術",
+    "cardSize": "カードの大きさ",
+    "cardLarge": "大きいカード",
+    "cardCompact": "小さいカード"
   },
   "difficulty": {
     "label": "難易度",

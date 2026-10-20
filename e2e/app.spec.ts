@@ -92,3 +92,31 @@ test('every gallery item page renders without errors', async ({ page }, info) =>
   }
   expect(errors).toEqual([]);
 });
+
+test('difficulty and technology filters narrow the gallery', async ({ page }) => {
+  await page.goto('./#/gallery');
+  const cards = page.locator('main article');
+  const total = await cards.count();
+  await page.locator('#gallery-level').selectOption('hard');
+  await expect(page).toHaveURL(/level=hard/);
+  const hard = await cards.count();
+  expect(hard).toBeGreaterThan(0);
+  expect(hard).toBeLessThan(total);
+  await page.locator('#gallery-tech').selectOption({ index: 1 });
+  expect(await cards.count()).toBeLessThanOrEqual(hard);
+  await page
+    .locator('button[title]')
+    .filter({ hasText: /Clear|クリア/ })
+    .click();
+  await expect(cards).toHaveCount(total);
+});
+
+test('compact card size is remembered', async ({ page }) => {
+  await page.goto('./#/gallery');
+  await page.getByRole('radio', { name: /Compact cards|小さいカード/ }).click();
+  await page.reload();
+  await expect(page.getByRole('radio', { name: /Compact cards|小さいカード/ })).toHaveAttribute(
+    'aria-checked',
+    'true',
+  );
+});

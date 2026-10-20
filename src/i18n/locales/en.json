@@ -52,7 +52,13 @@
     "sort": "Sort",
     "sortNewest": "Newest",
     "sortName": "Name",
-    "sortDifficulty": "Difficulty"
+    "sortDifficulty": "Difficulty",
+    "anyDifficulty": "Any difficulty",
+    "tech": "Technology",
+    "anyTech": "Any technology",
+    "cardSize": "Card size",
+    "cardLarge": "Large cards",
+    "cardCompact": "Compact cards"
   },
   "difficulty": {
     "label": "Difficulty",
