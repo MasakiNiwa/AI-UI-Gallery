@@ -13,9 +13,10 @@ A gallery of web UIs you can build by asking AI. Every exhibit is a **live, work
 - Example prompts with one-click copy, plus ideas for follow-up prompts
 - Preview demos at full width or mobile width
 - Responsive: bottom navigation bar on phones, sidebar on desktop
+- Favorites, viewing history and app-wide quick search (⌘K / Ctrl+K)
 - Light / dark theme (calm, low-contrast dark palette)
 - Automatic language selection from your browser (English and Japanese)
-- GPU and parallelism showcases: WebGL shaders, OffscreenCanvas rendering in a Web Worker
+- GPU and parallelism showcases: WebGL shaders, three.js 3D, WebGPU compute shaders, OffscreenCanvas rendering in a Web Worker
 
 ## Tech stack
 
@@ -27,6 +28,7 @@ A gallery of web UIs you can build by asking AI. Every exhibit is a **live, work
 | i18n     | [i18next](https://www.i18next.com/), react-i18next, i18next-browser-languagedetector                                                        |
 | State    | [Zustand](https://zustand.docs.pmnd.rs/) (persisted to localStorage)                                                                        |
 | Search   | [Fuse.js](https://www.fusejs.io/) in a Web Worker via [Comlink](https://github.com/GoogleChromeLabs/comlink)                                |
+| Demos    | [three.js](https://threejs.org/) (3D), WebGL / WebGPU (WGSL), Canvas 2D, OffscreenCanvas                                                    |
 | Quality  | ESLint, Prettier, Vitest                                                                                                                    |
 | Licenses | [rollup-plugin-license](https://github.com/mjeanroy/rollup-plugin-license)                                                                  |
 
