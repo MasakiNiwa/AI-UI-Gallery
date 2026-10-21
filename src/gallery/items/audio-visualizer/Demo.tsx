@@ -122,7 +122,7 @@ export default function Demo() {
       grad.addColorStop(1, 'rgba(90,110,200,.15)');
       ctx.fillStyle = grad;
       ctx.beginPath();
-      ctx.arc(cx, cy, radius - 4, 0, Math.PI * 2);
+      ctx.arc(cx, cy, Math.max(0, radius - 4), 0, Math.PI * 2);
       ctx.fill();
       ctx.strokeStyle = 'rgba(94,234,212,.8)';
       ctx.lineWidth = 2;
