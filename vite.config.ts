@@ -144,6 +144,14 @@ export default defineConfig({
         // The three.js demo chunk is ~530 kB; keep it precached so 3D works offline too.
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         navigateFallback: 'index.html',
+        // Gallery thumbnails are cached as they are viewed instead of all being precached.
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.includes('/previews/'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'previews', expiration: { maxEntries: 400 } },
+          },
+        ],
         cleanupOutdatedCaches: true,
       },
     }),

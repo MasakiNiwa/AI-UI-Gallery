@@ -14,6 +14,20 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.12.0',
+    date: '2026-10-21',
+    changes: {
+      en: [
+        'Smoother gallery: cards show still thumbnails, and only the card in the middle of the screen plays its live demo once scrolling stops.',
+        'Fixed the fullscreen button on demos (it did nothing); it now works on every device, including iPhone.',
+      ],
+      ja: [
+        'ギャラリーを軽量化:カードは静止画で表示し、スクロールが止まったときに画面中央のカードだけがライブデモを再生します。',
+        'デモの全画面ボタンが動かない不具合を修正し、iPhoneを含むすべての端末で使えるようにしました。',
+      ],
+    },
+  },
+  {
     version: '0.11.0',
     date: '2026-10-21',
     changes: {

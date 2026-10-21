@@ -71,7 +71,9 @@ src/
 3. Add `Demo.tsx` with a default-exported component. It receives `mode: 'preview' | 'full'`; it should fill
    its container (`h-full`) and use container-query variants (`@md:`, `@lg:` …) rather than viewport
    breakpoints so it responds to the preview width.
-4. Run `npm test`: the tests check that every item has complete metadata in every language.
+4. Generate its gallery thumbnails: `npm run build && npm run previews -- <your-id>` (writes
+   `public/previews/{light,dark}/<your-id>.jpg`).
+5. Run `npm test`: the tests check that every item has complete metadata in every language.
 
 The item is picked up automatically: no registration code needed. Demo code is split into its own chunk and
 only loaded when shown.

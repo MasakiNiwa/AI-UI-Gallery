@@ -32,6 +32,18 @@ describe('gallery registry', () => {
     }
   });
 
+  it('has light and dark gallery thumbnails for every item (run `npm run previews -- <id>`)', () => {
+    const files = new Set(
+      Object.keys(import.meta.glob('/public/previews/*/*.jpg')).map((p) =>
+        p.replace('/public/previews/', ''),
+      ),
+    );
+    const missing = ITEMS.flatMap((i) =>
+      ['light', 'dark'].map((t) => `${t}/${i.id}.jpg`).filter((f) => !files.has(f)),
+    );
+    expect(missing).toEqual([]);
+  });
+
   it('defines an icon for every category', () => {
     expect(CATEGORIES.map((c) => c.id).sort()).toEqual([...CATEGORY_IDS].sort());
   });

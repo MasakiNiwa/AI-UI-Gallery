@@ -1,5 +1,6 @@
 import { HashRouter, Route, Routes } from 'react-router';
 import { AppLayout } from './components/layout/AppLayout';
+import { CapturePage } from './pages/CapturePage';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { HelpPage } from './pages/HelpPage';
@@ -13,6 +14,7 @@ export function App() {
   return (
     <HashRouter>
       <Routes>
+        <Route path="capture/:id" element={<CapturePage />} />
         <Route element={<AppLayout />}>
           <Route index element={<HomePage />} />
           <Route path="gallery" element={<GalleryPage />} />

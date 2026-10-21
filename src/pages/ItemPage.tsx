@@ -43,7 +43,8 @@ export function ItemPage() {
   const item = getItem(id);
   const addRecent = useLibrary((s) => s.addRecent);
   const stageRef = useRef<HTMLElement>(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  /** Expanded demo: a fixed overlay covering the viewport (works everywhere, including iPhone). */
+  const [expanded, setExpanded] = useState(false);
   const [shared, setShared] = useState(false);
 
   useEffect(() => {
@@ -51,10 +52,22 @@ export function ItemPage() {
   }, [item, addRecent]);
 
   useEffect(() => {
-    const onChange = () => setIsFullscreen(document.fullscreenElement === stageRef.current);
+    if (!expanded) return;
+    // Leaving native fullscreen (e.g. with the browser's own controls) also collapses the overlay.
+    const onChange = () => !document.fullscreenElement && setExpanded(false);
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setExpanded(false);
     document.addEventListener('fullscreenchange', onChange);
-    return () => document.removeEventListener('fullscreenchange', onChange);
-  }, []);
+    document.addEventListener('keydown', onKey);
+    const root = document.documentElement;
+    const overflow = root.style.overflow;
+    root.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('fullscreenchange', onChange);
+      document.removeEventListener('keydown', onKey);
+      root.style.overflow = overflow;
+      if (document.fullscreenElement) void document.exitFullscreen().catch(() => {});
+    };
+  }, [expanded]);
 
   useEffect(() => {
     if (!shared) return;
@@ -85,10 +98,14 @@ export function ItemPage() {
   };
 
   const toggleFullscreen = () => {
-    if (document.fullscreenElement) void document.exitFullscreen();
-    else void stageRef.current?.requestFullscreen?.();
+    if (expanded) {
+      setExpanded(false);
+      return;
+    }
+    setExpanded(true);
+    // Also hide the browser UI where the Fullscreen API is available (not on iPhone).
+    if (document.fullscreenEnabled) void stageRef.current?.requestFullscreen?.().catch(() => {});
   };
-  const canFullscreen = typeof document !== 'undefined' && document.fullscreenEnabled;
 
   return (
     <article className="flex flex-col gap-6">
@@ -145,8 +162,12 @@ export function ItemPage() {
       </div>
 
       <section
+        ref={stageRef}
         aria-label={t('item.demo')}
-        className="overflow-hidden rounded-2xl border border-line"
+        className={cn(
+          'flex flex-col overflow-hidden bg-surface-2',
+          expanded ? 'pb-safe fixed inset-0 z-[60]' : 'rounded-2xl border border-line',
+        )}
       >
         <div className="flex items-center justify-between gap-2 border-b border-line bg-surface px-3 py-2">
           <span className="text-sm font-medium text-muted">{t('item.demo')}</span>
@@ -170,24 +191,23 @@ export function ItemPage() {
             >
               <RotateCcw className="size-4" />
             </Button>
-            {canFullscreen && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleFullscreen}
-                aria-label={isFullscreen ? t('item.exitFullscreen') : t('item.fullscreen')}
-                title={isFullscreen ? t('item.exitFullscreen') : t('item.fullscreen')}
-              >
-                {isFullscreen ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
-              </Button>
-            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleFullscreen}
+              aria-pressed={expanded}
+              aria-label={expanded ? t('item.exitFullscreen') : t('item.fullscreen')}
+              title={expanded ? t('item.exitFullscreen') : t('item.fullscreen')}
+            >
+              {expanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
+            </Button>
           </div>
         </div>
         <div className="flex-1 bg-surface-2 p-3 sm:p-4">
           <div
             className={cn(
               '@container mx-auto',
-              isFullscreen ? 'h-full' : 'h-[min(70vh,560px)]',
+              expanded ? 'h-full' : 'h-[min(70vh,560px)]',
               'overflow-hidden rounded-xl border border-line bg-bg transition-[max-width] duration-300',
               viewport === 'mobile' ? 'max-w-[390px]' : 'max-w-full',
             )}
