@@ -14,6 +14,18 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.13.0',
+    date: '2026-10-22',
+    changes: {
+      en: [
+        '11 new UIs (88 in total): Snake and a typing speed test, a weather widget, a radar chart, a day/night theme toggle, a searchable select, a collapsible sidebar rail, a cookie consent banner, interactive particle text, a responsive dashboard layout and a success checkmark animation.',
+      ],
+      ja: [
+        '11個のUIを追加(合計88個):スネークゲーム、タイピング速度テスト、天気ウィジェット、レーダーチャート、昼/夜のテーマ切り替え、検索できるセレクト、折りたためるサイドバー、Cookie同意バナー、パーティクル文字、レスポンシブなダッシュボード、完了チェックマークのアニメーション。',
+      ],
+    },
+  },
+  {
     version: '0.12.0',
     date: '2026-10-21',
     changes: {

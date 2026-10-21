@@ -54,7 +54,7 @@ try {
     for (const id of ids) {
       await page.goto(`http://localhost:${PORT}/#/capture/${id}?theme=${theme}`);
       await page.locator('[data-capture-ready]').waitFor();
-      await page.waitForTimeout(1800); // let entrance animations settle
+      await page.waitForTimeout(2200); // let entrance animations settle
       await page.screenshot({ path: `${OUT}/${theme}/${id}.jpg`, type: 'jpeg', quality: 72 });
       process.stdout.write(`${theme}/${id} `);
     }
