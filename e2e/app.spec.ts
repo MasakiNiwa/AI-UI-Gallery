@@ -171,3 +171,30 @@ test('code tab shows the highlighted demo source', async ({ page }, info) => {
   await page.getByRole('tab', { name: 'sim.ts' }).click();
   await expect(code).toContainText('createSim');
 });
+
+test('fullscreen button expands the demo to cover the screen and back', async ({ page }, info) => {
+  const ja = info.project.name === 'mobile';
+  await page.goto('./#/item/flip-card');
+  const stage = page.getByRole('region', { name: ja ? 'ライブデモ' : 'Live demo' });
+  await page.getByRole('button', { name: ja ? '全画面' : 'Fullscreen' }).click();
+  const viewport = page.viewportSize()!;
+  await expect
+    .poll(async () => (await stage.boundingBox())?.height)
+    .toBeGreaterThanOrEqual(viewport.height - 1);
+  await page.getByRole('button', { name: ja ? '全画面を終了' : 'Exit fullscreen' }).click();
+  await expect.poll(async () => (await stage.boundingBox())!.height).toBeLessThan(viewport.height);
+});
+
+test('gallery shows still thumbnails and runs at most one live preview', async ({ page }) => {
+  await page.goto('./#/gallery');
+  const thumbs = page.locator('main article img');
+  await expect(thumbs.first()).toBeVisible();
+  expect(await thumbs.count()).toBeGreaterThan(10);
+  // After scrolling stops, exactly one card (the centred one) mounts its live demo.
+  await page.mouse.wheel(0, 900);
+  await expect(page.locator('main article [inert]')).toHaveCount(1);
+  // Thumbnails are real images, not broken links.
+  expect(
+    await thumbs.first().evaluate((i) => (i as HTMLImageElement).naturalWidth),
+  ).toBeGreaterThan(0);
+});

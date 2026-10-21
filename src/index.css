@@ -144,3 +144,9 @@ body {
   line-height: 1.6;
   tab-size: 2;
 }
+
+@keyframes preview-in {
+  from {
+    opacity: 0;
+  }
+}
